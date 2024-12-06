@@ -1,8 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.Threading.Tasks.Dataflow;
+Console.WriteLine("Hello, Day 1!");
 
-
-var input = File.ReadAllLines("../data/input.txt");
+var input = File.ReadAllLines("data/input.txt");
 
 var lista = new List<int>();
 var listb = new List<int>();
