@@ -1,13 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.ComponentModel.DataAnnotations;
-using System.Net.Http.Headers;
 using System.Numerics;
-using System.Reflection.Metadata;
 
 Console.WriteLine("Hello, Day 11!");
 
 
-var input = File.ReadAllLines("data/input.txt");
+var input = File.ReadAllLines("data/sample.txt");
 
 var blinks = 25;
 
@@ -152,10 +149,9 @@ long Blink2(long stone, long blink, int max)
         created += Blink2(stone * 2024, blink + 1, max);   
     } 
 
-    if (!memo.ContainsKey((stone, blink)))  memo.Add((stone, blink), created);
+    memo.TryAdd((stone, blink), created);
 
-    return created;
-    
+    return created;    
 }
 
 (BigInteger, BigInteger) SplitBigInteger(BigInteger big)
