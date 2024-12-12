@@ -39,35 +39,37 @@ if (true)
     Console.WriteLine($"Completed in {stopwatch.ElapsedMilliseconds} ms");
 
     Console.WriteLine($"Solution after {blinks} blinks: {stonesCreated}");
-    return;
+
 }
-
-var stones = new BigIntegerLinkedList();
-input[0].Split(" ").Select(i => BigInteger.Parse(i)).ToList().ForEach(i => stones.Add(i));
-
-PrintStones(stones);
-
-for (var i = 0; i < 25; i++)
+else
 {
-    Blink(stones);
-    // PrintStones(stones);
-}
+    var stones = new BigIntegerLinkedList();
+    input[0].Split(" ").Select(i => BigInteger.Parse(i)).ToList().ForEach(i => stones.Add(i));
 
-Console.WriteLine($"Part1: {stones.Count}");
+    PrintStones(stones);
 
-// return;
+    for (var i = 0; i < 25; i++)
+    {
+        Blink(stones);
+        // PrintStones(stones);
+    }
+
+    Console.WriteLine($"Part1: {stones.Count}");
+
+    // return;
 
 
-for (var i = 0; i < 50; i++)
-{
-    Blink(stones);
+    for (var i = 0; i < 50; i++)
+    {
+        Blink(stones);
 
-    // PrintStones(stones);
-    
-    Console.WriteLine($"Blink: {i + 25}");
-}
+        // PrintStones(stones);
+        
+        Console.WriteLine($"Blink: {i + 25}");
+    }
 
 Console.WriteLine($"Part2: {stones.Count}");
+}
 
 void PrintStones(BigIntegerLinkedList stones)
 {
