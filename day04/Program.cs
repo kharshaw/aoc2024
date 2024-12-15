@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 var lines  = File.ReadAllLines("data/input.txt");
 
 
-static bool findEast(int y, int x, char[][] board)
+static bool findEast(long y, long x, char[][] board)
 {
     if (x + 3 > board[y].Length - 1) return false;
 
@@ -16,7 +16,7 @@ static bool findEast(int y, int x, char[][] board)
     return true;
 }
 
-static bool findWest(int y, int x, char[][] board)
+static bool findWest(long y, long x, char[][] board)
 {
     if (x - 3 < 0) return false;
 
@@ -28,7 +28,7 @@ static bool findWest(int y, int x, char[][] board)
     return true;
 }
 
-static bool findNorth(int y, int x, char[][] board)
+static bool findNorth(long y, long x, char[][] board)
 {
     if (y - 3 < 0) return false;
 
@@ -40,7 +40,7 @@ static bool findNorth(int y, int x, char[][] board)
     return true;
 }
 
-static bool findSouth(int y, int x, char[][] board)
+static bool findSouth(long y, long x, char[][] board)
 {
     if (y + 3 > board.Length -1) return false;
 
@@ -52,7 +52,7 @@ static bool findSouth(int y, int x, char[][] board)
     return true;
 }
 
-static bool findSouthEast(int y, int x, char[][] board)
+static bool findSouthEast(long y, long x, char[][] board)
 {
     // diagonal down
     if (y + 3 > board.Length -1 || x + 3 > board[y].Length  -1)return false;
@@ -65,7 +65,7 @@ static bool findSouthEast(int y, int x, char[][] board)
     return true;
 }
 
-static bool findNorthWest(int y, int x, char[][] board)
+static bool findNorthWest(long y, long x, char[][] board)
 {
     // diagonal up, backwards
     if (y - 3 < 0 || x - 3 < 0)return false;
@@ -78,7 +78,7 @@ static bool findNorthWest(int y, int x, char[][] board)
     return true;
 }
 
-static bool findNorthEast(int y, int x, char[][] board)
+static bool findNorthEast(long y, long x, char[][] board)
 {
     // diagonal up
     if (y - 3 < 0 || x + 3 > board[y].Length - 1)return false;
@@ -91,7 +91,7 @@ static bool findNorthEast(int y, int x, char[][] board)
     return true;
 }
 
-static bool findSouthWest(int y, int x, char[][] board)
+static bool findSouthWest(long y, long x, char[][] board)
 {
     // diagonal down, backwards
     if (y + 3 > board.Length - 1 || x - 3 < 0)return false;
@@ -104,7 +104,7 @@ static bool findSouthWest(int y, int x, char[][] board)
     return true;
 }
 
-static bool findCrossedMas(int y, int x, char[][] board)
+static bool findCrossedMas(long y, long x, char[][] board)
 {
     if (x + 2 > board[y].Length - 1 || y + 2 > board.Length - 1) return false;
 

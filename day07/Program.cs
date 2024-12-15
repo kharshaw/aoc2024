@@ -15,11 +15,11 @@ foreach (var line in input)
     equations[testValue] = calcValues;
 }
 
-IEnumerable<string> GenerateOperators(int neededOperators, char[] operators)
+IEnumerable<string> GenerateOperators(long neededOperators, char[] operators)
 {
     var result = new List<string> { "" };
 
-    for (int i = 0; i < neededOperators; i++)
+    for (long i = 0; i < neededOperators; i++)
     {
         var newResult = new List<string>();
         foreach (var str in result)
@@ -51,7 +51,7 @@ List<long> FindGoodTests(Dictionary<long, List<int>> equations, char[] operators
             currentResult = equation.Value[0];
 
             // run the equation for this permutation of operators
-            for (int i = 1, j = 0; i < equation.Value.Count; i++, j++)
+            for (long i = 1, j = 0; i < equation.Value.Count; i++, j++)
             {
                 if (ops[j] == '+') 
                 {

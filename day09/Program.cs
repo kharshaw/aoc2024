@@ -16,7 +16,7 @@ var id = 0;
 var blocks = new List<int>();
 var files = new List<(int, int)>();
 
-for (int sizeIdx = 0, freeIdx = 1; sizeIdx < condensed.Length; sizeIdx += 2, freeIdx += 2)
+for (long sizeIdx = 0, freeIdx = 1; sizeIdx < condensed.Length; sizeIdx += 2, freeIdx += 2)
 {
 
     var size = int.Parse(condensed[sizeIdx].ToString());
@@ -140,7 +140,7 @@ Console.WriteLine($"Part2: checksum: {checksum}");
 
 static void PrintFilesystem(List<(int, int)> files)
 {
-    // print files
+    // prlong files
     foreach (var file in files)
     {
         for (var i = 0; i < file.Item2; i++)

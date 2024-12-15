@@ -1,24 +1,26 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Runtime.CompilerServices;
+
 Console.WriteLine("Hello, Day 12!");
 
 
-var input = File.ReadAllLines("data/simple.txt");
+var input = File.ReadAllLines("data/sample.txt");
 
 
 var map = input
     .Select(line => line.ToCharArray())
     .ToArray();
 
-var plotted = new List<(int y, int x)>();
+var plotted = new List<(long y, long x)>();
 
 
 
 
 
-int cost = 0;
+long cost = 0;
 
-var gardens = new List<List<(int y, int x)>>();
+var gardens = new List<List<(long y, long x)>>();
 
 for (var y = 0; y < map.Length; y++)
 {
@@ -26,7 +28,7 @@ for (var y = 0; y < map.Length; y++)
     {
         if (plotted.Contains((y,x))) continue;
         
-        (int perimeter, int area) = CalculatePlot((y, x));
+        (long perimeter, long area) = CalculatePlot((y, x));
 
         cost += perimeter * area;
 
@@ -38,26 +40,7 @@ for (var y = 0; y < map.Length; y++)
     }
 }
 
-Console.WriteLine($"Part1: Cost: {cost}");
-
-// part 2
-
-foreach (var garden in gardens)
-{
-    var checks = new List<(int y, int x)>()
-    {
-        (-1, 0), (1, 0), (0, -1), (0, 1)
-    };
-
-    var plant = garden[0];
-
-    var sides = 1;
-
-    
-}
-
-
-(int perimeter, int area) CalculatePlot((int y, int x) location)
+(long perimeter, long area) CalculatePlot((long y, long x) location)
 {
     if (plotted.Contains(location) || location.y < 0 || location.x < 0 || location.y >= map.Length || location.x >= map[0].Length) return (0,0);
 
@@ -135,3 +118,100 @@ foreach (var garden in gardens)
 
     return (perimeter, area);
 }
+
+Console.WriteLine($"Part1: Cost: {cost}");
+
+long sideCost = 0;
+
+foreach (var garden in gardens)
+{
+    sideCost += GetNumSides(garden) * garden.Count;
+}
+
+Console.WriteLine($"Part2: Side-based Cost: {sideCost}");
+
+    long GetNumSides(List<(int, int)> coordinates)
+    {
+        foreach (var coordinate in coordinates)
+        {
+            Console.Write($"({coordinate.Item1}, {coordinate.Item2})");
+        }
+        Console.WriteLine();
+
+        long numSides = 0;
+        for (long i = 0; i < coordinates.Count; i++)
+        {
+            var (x, y) = coordinates[i];
+            if (i == 0)
+            {
+                numSides += 2; // Top side of the first block
+            }
+            if (i == coordinates.Count - 1)
+            {
+                numSides += 2; // Bottom side of the last block
+            }
+            if (i > 0 && i < coordinates.Count - 1)
+            {
+                numSides += 4; // Left and right sides of all blocks except the first and last
+            }
+        }
+        return numSides;
+    }
+/*
+// part 2
+(long y, long x) NORTH = (-1, 0);
+(long y, long x) SOUTH = (1, 0);
+(long y, long x) EAST = (0, 1);
+(long y, long x) WEST = (0, -1);
+
+
+var directions = new List<(long y, long x)>()
+{
+    NORTH, SOUTH, EAST, WEST
+};
+
+foreach (var garden in gardens)
+{
+
+    var plant = garden[0];
+    var start = plant;
+    var sides = 0;
+    var edgeAt = NORTH;
+
+    plant = FindGardenEdge(garden, plant, edgeAt); 
+    sides++;
+
+    {
+        var next = directions.Where(c => garden.Contains((plant.y + c.y, plant.x + c.x))).First();
+
+
+        if (garden.Contains(Move(plant, EAST)))
+        {
+            plant = Move(plant, EAST);
+        }
+    } while (plant != start);
+
+    
+}
+
+(long y, long x) Move((long y, long x) location, (long y, long x) direction)
+{
+    return (location.y + direction.y, location.x + direction.x);
+}
+
+bool HasEdgeAt(List<(long y, long x)> garden, (long y, long x) location, (long y, long x) EdgeAt)
+{
+    return !garden.Contains(Move(location, EdgeAt));
+}
+
+(long y, long x) FindGardenEdge(List<(long y, long x)> garden, (long y, long x) plant, (long y, long x) move)
+{
+        var neighbors = directions.Where(c => garden.Contains((plant.y + c.y, plant.x + c.x))).ToList();
+
+        if (neighbors.Count < 4) return plant;
+
+        return FindGardenEdge(garden, (plant.y + move.y, plant.x + move.x), move);
+}
+
+
+*/

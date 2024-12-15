@@ -34,7 +34,7 @@ Dictionary<char, List<(int, int)>> GetMap(string[] input)
     return map;
 }
 
-List<(int, int)> IdentifyAntinodes(List<(int, int)> antenna, char frequency, int maxY, int maxX, bool allowHarmonics = false)
+List<(int, int)> IdentifyAntinodes(List<(int, int)> antenna, char frequency, long maxY, long maxX, bool allowHarmonics = false)
 {
     var antinodes = new List<(int, int)>();
 
@@ -50,7 +50,7 @@ List<(int, int)> IdentifyAntinodes(List<(int, int)> antenna, char frequency, int
             var dY = b.Item1 - a.Item1;
             var dX = b.Item2 - a.Item2;
 
-            var point = a;
+            var polong = a;
             
             antinodes.AddRange(CreateAntinodes(maxY, maxX, allowHarmonics, dY, dX, a));
             antinodes.AddRange(CreateAntinodes(maxY, maxX, allowHarmonics, -dY, -dX, b));
@@ -59,7 +59,7 @@ List<(int, int)> IdentifyAntinodes(List<(int, int)> antenna, char frequency, int
 
     return antinodes;
 
-    List<(int, int)> CreateAntinodes(int maxY, int maxX, bool allowHarmonics, int dY, int dX, (int, int) startPoint)
+    List<(int, int)> CreateAntinodes(long maxY, long maxX, bool allowHarmonics, long dY, long dX, (int, int) startPoint)
     {
         var antinodes = new List<(int, int)>();
         bool done = false;
@@ -71,7 +71,7 @@ List<(int, int)> IdentifyAntinodes(List<(int, int)> antenna, char frequency, int
             if (!(antinode.Item1 < 0 || antinode.Item1 > maxY || antinode.Item2 < 0 || antinode.Item2 > maxX))
             {
                 antinodes.Add(antinode);
-                startPoint = antinode;
+                startPolong = antinode;
                 if (allowHarmonics) continue;
             }
             done = true;

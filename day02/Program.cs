@@ -3,7 +3,7 @@
 var input = File.ReadAllLines("data/input.txt");
 
 
-static bool isIncreasing(int a, int b) => a < b;
+static bool isIncreasing(long a, long b) => a < b;
 
 var safeCount = 0;
 
@@ -41,7 +41,7 @@ Console.WriteLine($"Part1: {safeCount}");
 
 safeCount = 0;
 
-static bool CheckLevels(List<int> levels, out int failIndex)
+static bool CheckLevels(List<int> levels, out long failIndex)
 {
     var levelsAreIncreasing = isIncreasing(levels[0], levels[1]);
 
@@ -80,7 +80,7 @@ foreach (var report in input)
 
     var levelsAreIncreasing = isIncreasing(levels[0], levels[1]);
 
-    int failIndex = -1;
+    long failIndex = -1;
 
     var isSafe = CheckLevels(levels, out failIndex);
 

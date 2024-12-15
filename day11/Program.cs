@@ -4,20 +4,20 @@ using System.Numerics;
 Console.WriteLine("Hello, Day 11!");
 
 
-var input = File.ReadAllLines("data/sample.txt");
+var input = File.ReadAllLines("data/input.txt");
 
 var blinks = 25;
 
 if (args.Length > 0) blinks = int.Parse(args[0]);
 
-Dictionary<(long stone, long blink), long > memo = new Dictionary<(long stone, long blink), long >();
+Dictionary<(BigInteger stone, long blink), BigInteger > memo = new Dictionary<(BigInteger stone, long blink), BigInteger >();
 
 if (true)
 {
     var stopwatch = new System.Diagnostics.Stopwatch();
 
     var stuff = input[0].Split(" ").Select(s => long.Parse(s)).ToList();
-    long stonesCreated = 0;
+    BigInteger stonesCreated = 0;
 
     stopwatch.Start();
 
@@ -116,7 +116,7 @@ void Blink(BigIntegerLinkedList stones)
 }
 
 
-long Blink2(long stone, long blink, int max)
+BigInteger Blink2(BigInteger stone, long blink, long max)
 {
 
     if (blink > max) return 0;
@@ -126,9 +126,9 @@ long Blink2(long stone, long blink, int max)
         return memo[(stone, blink)];
     }
 
-    long created = 0;
+    BigInteger created = 0;
 
-    var digits = (long)Math.Log10(stone) + 1;
+    var digits = (long)BigInteger.Log10(stone) + 1;
   
     if (stone == 0)
     {
@@ -136,7 +136,7 @@ long Blink2(long stone, long blink, int max)
     }
     else if (digits % 2 == 0)
     {
-        var (firstPart, secondPart) = SplitNumber(stone);
+        var (firstPart, secondPart) = SplitBigInteger(stone);
 
         created++;
 
@@ -157,7 +157,7 @@ long Blink2(long stone, long blink, int max)
 (BigInteger, BigInteger) SplitBigInteger(BigInteger big)
 {
     var digits = (int)BigInteger.Log10(big) + 1;
-    int halfDigits = digits / 2;
+    long halfDigits = digits / 2;
 
     BigInteger divisor = BigInteger.Pow(10, halfDigits);
 
@@ -171,7 +171,7 @@ long Blink2(long stone, long blink, int max)
 (long firstPart, long secondPart) SplitNumber(long number)
 {
     var digits = (int)Math.Log10(number) + 1;
-    int halfDigits = digits / 2;
+    long halfDigits = digits / 2;
 
     var divisor = (long)Math.Pow(10, halfDigits);
 
@@ -300,13 +300,13 @@ public class BigIntegerLinkedList
         node.Value = newValue;
     }
 
-    public BigInteger this[int index]
+    public BigInteger this[long index]
     {
         get
         {
             if (index < 0 || index >= Count) throw new IndexOutOfRangeException();
             BigIntegerNode? current = Head;
-            for (int i = 0; i < index; i++)
+            for (long i = 0; i < index; i++)
             {
                 current = current!.Next;
             }

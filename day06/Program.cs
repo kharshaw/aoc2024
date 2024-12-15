@@ -7,9 +7,9 @@ var input = File.ReadAllLines("data/input.txt");
 
 var guard = new HashSet<char> {'^', 'v', '<', '>'};
 
-var visited = new Dictionary<(int y, int x), int>();
+var visited = new Dictionary<(long y, long x), int>();
 
-var turns = new List<(int y, int x)>();
+var turns = new List<(long y, long x)>();
 
 (int, int) FindGuard(char[][] board)
 {
@@ -24,7 +24,7 @@ var turns = new List<(int y, int x)>();
     return (-1, -1);
 }
 
-void MakeTurn(char[][] board, (int y, int x) location)
+void MakeTurn(char[][] board, (long y, long x) location)
 {
     var turn = new Dictionary<char, char>()
     {
@@ -42,7 +42,7 @@ void MakeTurn(char[][] board, (int y, int x) location)
 
 }
 
-void MarkVisited(int y, int x, char[][] board, bool track)
+void MarkVisited(long y, long x, char[][] board, bool track)
 {
     
         board[y][x] = 'X';
@@ -51,7 +51,7 @@ void MarkVisited(int y, int x, char[][] board, bool track)
         
 }
 
-(int, int) Move((int y, int x) guard, char[][] board, bool track = true)
+(int, int) Move((long y, long x) guard, char[][] board, bool track = true)
 {
     var nextStep = new Dictionary<char, (int, int)>()
     {
@@ -110,7 +110,7 @@ var board = input
     .Select(line => line.ToCharArray())
     .ToArray();
 
-(int y, int x) = FindGuard(board);
+(long y, long x) = FindGuard(board);
 
 while (y != -1 && x != -1)
 {
@@ -120,7 +120,7 @@ while (y != -1 && x != -1)
 
 Console.WriteLine($"Part1: unique locations: {visited.Count}");
 
-bool HasCycle(List<(int y, int x)> turns)
+bool HasCycle(List<(long y, long x)> turns)
 {
     // check if there are any duplicate turns
 

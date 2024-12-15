@@ -15,7 +15,7 @@ var board = input
 var acc = 0;
 var rating = 0;
 
-List<(int y, int x)> trailheads = FindTrailheads(board);
+List<(long y, long x)> trailheads = FindTrailheads(board);
 
 foreach (var trailhead in trailheads)
 {
@@ -23,7 +23,7 @@ foreach (var trailhead in trailheads)
 
     var trails = HikeTrail(board, trailhead);
 
-    var trailends = new List<(int y, int x)>();
+    var trailends = new List<(long y, long x)>();
 
     var score = trails.Select(t => t[0]).Distinct().Count();
 
@@ -46,19 +46,19 @@ Console.WriteLine($"Part1: {acc} ");
 
 Console.WriteLine($"Part2: {rating} ");
 
-List<List<(int y, int x)>> HikeTrail(int[][] board, (int y, int x) location)
+List<List<(long y, long x)>> HikeTrail(int[][] board, (long y, long x) location)
 {
-    var trails = new List<List<(int y, int x)>>();
+    var trails = new List<List<(long y, long x)>>();
 
     var locationHeight = board[location.y][location.x];
 
     if (locationHeight == 9) 
     {
-        trails.Add(new List<(int y, int x)>() {location});
+        trails.Add(new List<(long y, long x)>() {location});
         return trails;
     }    
 
-    var nextSteps = new List<(int y, int x)>();
+    var nextSteps = new List<(long y, long x)>();
 
     var north = location.y - 1;
     var south = location.y + 1;
@@ -108,9 +108,9 @@ void printBoard(int[][] board)
     }
 }
 
-static List<(int y, int x)> FindTrailheads(int[][] board)
+static List<(long y, long x)> FindTrailheads(int[][] board)
 {
-    var trailheads = new List<(int y, int x)>();
+    var trailheads = new List<(long y, long x)>();
 
     for (var y = 0; y < board.Length; y++)
     {
